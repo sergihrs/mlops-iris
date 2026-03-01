@@ -1,5 +1,13 @@
 # Iris MLOps: End-to-End Production ML Pipeline
 
+![Python](https://img.shields.io/badge/python-3.11+-blue.svg)
+![Docker](https://img.shields.io/badge/docker-%230db7ed.svg?logo=docker&logoColor=white)
+![Kubernetes](https://img.shields.io/badge/kubernetes-%23326ce5.svg?logo=kubernetes&logoColor=white)
+![MLflow](https://img.shields.io/badge/MLflow-%23d9ead3.svg?logo=mlflow&logoColor=black)
+![Prometheus](https://img.shields.io/badge/Prometheus-E6522C?logo=prometheus&logoColor=white)
+![Grafana](https://img.shields.io/badge/Grafana-F46800?logo=grafana&logoColor=white)
+![DVC](https://img.shields.io/badge/DVC-945DFF?logo=data-version-control&logoColor=white)
+
 A professional-grade MLOps repository demonstrating a complete lifecycle for machine learning models, from data versioning and reproducible training to containerized orchestration and live monitoring.
 
 ## 🚀 Key Highlights & Technologies
