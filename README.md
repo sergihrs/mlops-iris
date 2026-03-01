@@ -10,6 +10,8 @@
 
 A professional-grade MLOps repository demonstrating a complete lifecycle for machine learning models, from data versioning and reproducible training to containerized orchestration and live monitoring.
 
+> **⚠️ Note:** The GKE deployment step in the CI/CD pipeline requires an **active Google Cloud billing account** and will fail without one. The training job (DVC + MLflow) is unaffected. See the [Production (Kubernetes)](#production-kubernetes) section for setup instructions.
+
 ## 🚀 Key Highlights & Technologies
 
 - **Core Logic:** Robust **Python** implementation for data processing and modeling.
@@ -122,6 +124,15 @@ kubectl apply -f k8s/api-service.yaml -f k8s/api-deployment.yaml
 kubectl apply -f k8s/web-service.yaml -f k8s/web-deployment.yaml
 
 ```
+
+> **⚠️ GKE Setup Required:** To enable the `deploy-to-gke` CI/CD job, you need:
+>
+> 1. A GCP project with billing enabled and GKE API activated.
+> 2. A service account key stored as the `GCP_SA_KEY` GitHub secret.
+> 3. The following GitHub variables configured: `GCP_PROJECT_ID`, `GKE_CLUSTER`, `GKE_ZONE`.
+> 4. Update the container image references in `k8s/api-deployment.yaml` and `k8s/web-deployment.yaml` to match your project's GCR path (`gcr.io/<YOUR_PROJECT_ID>/...`).
+>
+> If you don't need GKE deployment, you can safely remove or skip the `deploy-to-gke` job in `.github/workflows/cml.yaml`.
 
 ---
 
