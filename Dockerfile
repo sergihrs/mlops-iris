@@ -6,7 +6,7 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 # Copiar los scripts de la aplicación y el modelo
-COPY app.py .
+COPY src/app.py .
 COPY model.pkl .
 # Exponer el puerto en el que se ejecutará la aplicación
 EXPOSE 5000

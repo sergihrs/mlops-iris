@@ -27,16 +27,26 @@ A professional-grade MLOps repository demonstrating a complete lifecycle for mac
 
 ```bash
 ├── .github/workflows/    # CI/CD pipelines (CML & GKE Deployment)
+├── src/                  # Application source code
+│   ├── app.py            # Flask REST API
+│   ├── app_web.py        # Streamlit Dashboard
+│   └── train.py          # MLflow-integrated training script
+├── k8s/                  # Kubernetes manifests
+│   ├── api-deployment.yaml
+│   ├── api-service.yaml
+│   ├── web-deployment.yaml
+│   ├── web-service.yaml
+│   └── pod-monitoring.yaml
+├── monitoring/           # Observability configuration
+│   ├── prometheus.yml
+│   └── grafana-provisioning/
 ├── data/                 # Data directory (versioned by DVC)
-├── grafana-provisioning/ # Automated Grafana datasource configuration
-├── api-deployment.yaml   # K8s Deployment for the Inference API
-├── web-deployment.yaml   # K8s Deployment for the Streamlit UI
-├── app.py                # Flask REST API
-├── app_web.py            # Streamlit Dashboard
-├── train.py              # MLflow-integrated training script
-├── dvc.yaml              # DVC pipeline definition
+├── Dockerfile            # API container image
+├── Dockerfile.web        # Streamlit container image
 ├── docker-compose.yml    # Local multi-container orchestration
-└── prometheus.yml        # Monitoring configuration
+├── dvc.yaml              # DVC pipeline definition
+├── params.yaml           # Training hyperparameters
+└── requirements.txt      # Python dependencies
 
 ```
 
@@ -108,8 +118,8 @@ docker-compose up --build
 The repository includes ready-to-use manifests for GKE deployment:
 
 ```bash
-kubectl apply -f api-service.yaml -f api-deployment.yaml
-kubectl apply -f web-service.yaml -f web-deployment.yaml
+kubectl apply -f k8s/api-service.yaml -f k8s/api-deployment.yaml
+kubectl apply -f k8s/web-service.yaml -f k8s/web-deployment.yaml
 
 ```
 
@@ -119,7 +129,7 @@ kubectl apply -f web-service.yaml -f web-deployment.yaml
 
 The system is designed with a "production-first" mentality:
 
-- **Metrics:** `app.py` exposes a `/metrics` endpoint for Prometheus.
+- **Metrics:** `src/app.py` exposes a `/metrics` endpoint for Prometheus.
 - **Tracking:** Every prediction is tracked by species to monitor for potential data drift or class imbalance via the Grafana dashboard.
 - **CI/CD:** Automated CML reports provide instant feedback on model accuracy shifts during code reviews.
 
